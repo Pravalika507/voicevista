@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Help - VoiceSecure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            padding: 40px;
+            margin: 20px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .help-section {
+            margin-bottom: 30px;
+        }
+        
+        .help-section h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Help Center</h1>
+        
+        <div class="help-section">
+            <h2>Getting Started</h2>
+            <p>Welcome to VoiceSecure! Here's how to get started:</p>
+            <ol>
+                <li>Register for an account if you don't have one</li>
+                <li>Login using your credentials</li>
+                <li>Access the dashboard to use voice commands and chat</li>
+            </ol>
+        </div>
+        
+        
+        <div class="help-section">
+            <h2>Contact Support</h2>
+            <p>Need further assistance? Contact our support team at support@voicesecure.com</p>
+        </div>
+        
+        <a href="{{ url_for('login') }}" class="back-link">← Back to Login</a>
+    </div>
+</body>
+</html>

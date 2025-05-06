@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VoiceSecure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --vista-blue: #5e60ce;
+            --vista-purple: #7400b8;
+            --vista-pink: #ff0a54;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 900px;
+            padding: 40px;
+            display: flex;
+            border: 2px solid var(--vista-purple);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .login-section {
+            flex: 1;
+            padding: 20px;
+            border-right: 2px dashed var(--vista-blue);
+        }
+        
+        .title-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .vista-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--vista-purple), var(--vista-blue), var(--vista-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(94, 96, 206, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(116, 0, 184, 0.7), 0 0 20px rgba(255, 10, 84, 0.4);
+            }
+        }
+        
+        .vista-subtitle {
+            color: var(--vista-blue);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .vista-features {
+            list-style: none;
+            text-align: left;
+            width: 80%;
+        }
+        
+        .vista-features li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+            color: var(--dark);
+        }
+        
+        .vista-features li:before {
+            content: "✓";
+            color: var(--vista-blue);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .divider::before {
+            margin-right: 10px;
+        }
+        
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .error-message {
+            color: var(--danger);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .success-message {
+            color: green;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="video-background">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-woman-using-her-voice-to-create-a-wave-39839-large.mp4" type="video/mp4">
+    </video>
+    
+    <div class="container">
+        <div class="login-section">
+            <h1>Welcome Back</h1>
+            
+            {% if error %}
+            <div class="error-message">{{ error }}</div>
+            {% endif %}
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="{{ category }}-message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('login') }}">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            
+            <div class="divider">OR</div>
+            
+            <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+            <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+            <a href="/help">Need help?</a>
+        </div>
+        
+        <div class="title-section">
+            <h1 class="vista-title floating">VoiceVista</h1>
+            <p class="vista-subtitle">Your gateway to seamless voice experiences</p>
+            
+            <ul class="vista-features">
+                <li>Advanced voice recognition</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
